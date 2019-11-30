@@ -1,0 +1,7 @@
+sessions/
+node_modules/
+bin/
+network/base
+network/config
+network/crypto-config
+wallet

@@ -1,0 +1,167 @@
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+<script>
+    function Search_Post_API(PageNo) {
+
+        var intPageSize = 0;
+        var intTotalPages = 0;
+        var confmKey = "devU01TX0FVVEgyMDE5MTEyMjIyMTA1NjEwOTIxNDk=";
+
+        var strUrl = 'http://www.juso.go.kr/addrlink/addrLinkApiJsonp.do';
+        if (!searchJuso()) {
+            try {
+                console.log('hi')
+                $.ajax({
+                    url: strUrl,
+                    data: ({ currentPage: PageNo, countPerPage: intPageSize, keyword: $('#txt_SearchText').val(), confmKey:confmKey }),
+                    dataType: 'jsonp',
+                    crossDomain: true,
+                    success: function (xmlStr) {
+                        if (navigator.appName.indexOf('Microsoft') > -1) {
+                            var xmlData = new ActiveXObject('Microsoft.XMLDOM');
+                            xmlData.loadXML(xmlStr.returnXml)
+                        } else {
+                            var xmlData = xmlStr.returnXml;
+                        }
+                        console.log(xmlData)
+                        var errCode = $(xmlData).find('errorCode').text();
+                        var errDesc = $(xmlData).find('errorMessage').text();
+                        var PostList = '';
+                        console.log(errCode)
+                        if (errCode == '0') {
+                            if (xmlStr != null) {
+                                PostList += '<p><strong>' + $(xmlData).find('totalCount').text() + "개</strong>의 주소가 검색되었습니다.</p>";
+
+                                PostList += "<ul>";
+
+                                $(xmlData).find('juso').each(function (i) {
+                                    PostList += "<li>";
+                                    // PostList += "<a href=\
+                                    // javascript:SetOpenerValue('" + $(xmlData).find('zipNo').eq(i).text() + "', '" + $(xmlData).find('roadAddr').eq(i).text().replace("'", " ") + "');\">";
+                                    PostList += `<a href="javascript:SetOpenerValue('${$(xmlData).find('roadAddr').eq(i).text().replace("'", " ")}');">`
+                                    PostList += "<em>" + $(xmlData).find("zipNo").eq(i).text() + "</em>";
+                                    PostList += "<span>" + $(xmlData).find("roadAddr").eq(i).text() + "<br/>" + $(xmlData).find("jibunAddr").eq(i).text() + "</span>";
+                                    PostList += "</a>";
+                                    PostList += "</li>";
+
+                                });
+                                
+                                PostList += "</ul>";
+                                
+                                $("#dvSearchArea").html(PostList);
+
+                                //페이징
+                                if ($(xmlData).find("totalCount").text() != 0) {
+                                    intTotalPages = Math.ceil($(xmlData).find('totalCount').text() / intPageSize);
+                                    $('#div_paginate').html(PageLink(PageNo, intTotalPages, "Search_Post_API"));
+                                }
+                            }
+                        } else if (errCode == 'E0005') {
+                            alert('검색어를 입력해주세요.');
+                        } else if (errCode == 'E0006') {
+                            alert('주소를 상세히 입력해주세요.');
+                        } else {
+                            console.log('a?')
+                            ErrorJuso();
+                        }
+                    },
+                    error : function (xhr, status, error) {
+                        console.log('b?')
+                        ErrorJuso();
+                    }
+                });
+            } catch (err) {
+                ErrorJuso();
+            }
+        } else {
+            console.log('ajax false');
+        }
+        return;
+    }
+
+    function ErrorJuso() {
+        alert('에러발생 시 코드 작성');
+    }
+
+    function searchJuso() {
+        if (!checkSearchedWord($('txt_SearchText').val())) {
+            console.log('true')
+            return true;
+        } else {
+            console.log('false')
+            return false;
+        }
+    }
+
+    function checkSearchedWord(obj) {
+        if (obj != null && obj != "") {
+            //특수문자 제거
+            var expText = /[%=><+^*]/;
+            if(expText.text(obj) == true) {
+                alert('특수문자를 입력할 수 없습니다.');
+                $('#txt_SearchText').val(obj.replace(expText, ""));
+                return false;
+            }
+            //특정 문자열 (sql 예약어의 앞뒤공백포함) 제거
+            var sqlArray = new Array("AND", "OR", "SELECT", "INSERT", "DELETE", "UPDATE", "CREATE", "ALTER", "DROP", " EXEC", "UNION", "FETCH", "DECLARE", "TRUNCATE", "SHUTDOWN");
+
+            for (var i = 0; i < sqlArray.length; i++) {
+                if(obj.match(sqlArray[i])) {
+                    alert(sqlArray[i] + "와(과) 같은 특정문자로 검색할 수 없습니다.");
+                    $('#txt_SearchText').val(obj.replace(sqlArray[i], ""));
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    //임시 페이징
+    function PageLink(curPage, totalPages, funName) {
+        pageUrl = "";
+
+        var pageLimit = 5;
+        var startPage = parseInt((curPage -1 ) / pageLimit) * pageLimit + 1;
+        var endPage = startPage + pageLimit - 1;
+
+        if(totalPages < endPage) {
+            endPage = totalPages;
+        }
+
+        var nextPage = endPage + 1;
+
+        if (curPage > 1 && pageLimit < curPage) {
+            pageUrl += "<a class='first' href='javascript:" + funName + "(1)';>처음</a>";
+        }
+
+        if (curPage > pageLimit) {
+            pageUrl += "<a class='prev' href='javascript:" + funName + "(" + (startPage == 1 ? 1 : startPage - 1) + ")';>이전</a>";
+        }
+        for (var i = startPage; i <= endPage; i++ ) {
+            if (i == curPage) {
+                pageUrl += "<a href='#'><strong>" + i + "</strong></a>";
+            } else {
+                pageUrl += "<a href='javascript:" + funName + "(" + i + ");'>" + i + "</a>";
+            }
+        }
+
+        if (nextPage <= totalPages) {
+            pageUrl += "<a class='next' href='javascript:" + funName + "(" + (nextPage < totalPages ? nextPage : totalPages) + ");'></a>";
+        }
+        if (curPage < totalPages && nextPage < totalPages) {
+            pageUrl += "<a class='last' href='javascript:" + funName + "(" + totalPages + ");'>끝</a>";
+        }
+        return pageUrl;
+    }
+    function SetOpenerValue(data) {
+        opener.jusoCallBack2(data);
+        window.close();
+    }
+</script>
+<input type='hidden' id='hid_Key' value='devU01TX0FVVEgyMDE5MTEyMjEzMjU1MTEwOTIxMjg='/>
+<label for='inptxt3'>검색어</label><input type='text' id='txt_SearchText'/>
+<button onclick="Search_Post_API(1)">검색</button>
+<div id='dvSearchArea' class='cresultArea'></div>
+<div id='div_paginate' class='paginate'></div>

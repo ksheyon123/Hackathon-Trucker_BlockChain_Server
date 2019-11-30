@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="stylesheets/login.css"> 
+    <title>Document</title>
+</head>
+<body>
+    <section class="container">
+        <article class="half">
+            <h1>Login & Register</h1>
+            <div class="tabs">
+                <span class="tab signin active"><a href="#signin">Sign in</a></span>
+                <span class="tab signup"><a href="#signup">Sign up</a></span>
+            </div>
+            <div class="content">
+                <div class="signin-cont cont">
+                        <label for="email">Your phonenumber</label>
+                        <input type="text" name="phonenumber" id="lgnPN" value='' class="inpt" placeholder="Your phonenumber">
+                        <label for="password">Your password</label>
+                        <input type="password" name="password" id="lgnPW" value='' class="inpt" placeholder="Your password">
+                        <label for="remember">Remember me</label>
+                        <input type="checkbox" id="remember" class="checkbox" checked>
+                        <!-- <button type='submit' id='signin'>Sign in</button> -->
+                        <div class="submit-wrap">
+                            <button type="submit" id='signin' class="submit">Sign in</button>
+                            <a href="#" class="more">Forgot your password?</a>
+                        </div>
+                        <!-- <div class="submit-wrap">
+                            <input type="submit" value="Sign in" class="submit">
+                            <a href="#" class="more">Forgot your password?</a>
+                        </div> -->
+                </div>
+                <div class="signup-cont cont">
+                        <label for="name">Your name</label>
+                        <input type="text" name="name" id="regNM" class="inpt" placeholder="Your name">
+                        <label for="email">Your phonenumber</label>
+                        <input type="text" name="phonenumber" id="regPN" class="inpt" placeholder="Your phonenumber">
+                        <label for="password">Your password</label>
+                        <input type="password" name="password" id="regPW" class="inpt" placeholder="Your password">
+                        <button type='submit' id='signup'>Sign up</button>
+                        <!-- <div class="submit-wrap">
+                            <input type="submit" value="Sign up" class="submit">
+                            <a href="#" class="more">Terms and conditions</a>
+                        </div> -->
+                </div>
+            </div>
+        </article>
+        <div class="half bg"><img src='images/hand.png'></div>
+    </section>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $('.signup-cont').hide();
+});
+
+$('.tabs .tab').click(function(){
+    if ($(this).hasClass('signin')) {
+        $('.tabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.signin-cont').show();
+    } 
+    if ($(this).hasClass('signup')) {
+        $('.tabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.signup-cont').show();
+    }
+});
+$('#signin').click(async function() {
+    var lgnPN = document.getElementById('lgnPN').value;
+    var lgnPW = document.getElementById('lgnPW').value;
+    try {
+        const response = await fetch('http://localhost:3000/login', {
+               method: 'post',
+               headers: {
+                  "Content-Type": "application/json"
+               },
+               body: JSON.stringify({ca: 'web', phonenumber : lgnPN, password : lgnPW}),
+            });
+
+            if(response.ok) {
+                window.location.assign('http://localhost:3000/main');
+            } else {
+                window.alert('Login Failed');
+            }
+    } catch (err) {
+        window.alert('login 정보를 확인해주세요!');
+    }
+});
+
+$('#signup').click(async function() {
+    var regPN = document.getElementById('regPN').value;
+    var regPW = document.getElementById('regPW').value;
+    var regNM = document.getElementById('regNM').value;
+    try {
+        const response = await fetch('http://localhost:3000/register', {
+               method: 'post',
+               headers: {
+                  "Content-Type": "application/json"
+               },
+               body: JSON.stringify({ca: 'web', phonenumber : regPN, username: regNM, password : regPW}),
+            });
+
+            if(response.ok) {
+                window.location.assign('http://localhost:3000/main');
+            } else {
+                window.alert('Login Failed');
+            }
+    } catch (err) {
+        window.alert('login 정보를 확인해주세요!');
+    }
+})
+
+</script>
+</html>

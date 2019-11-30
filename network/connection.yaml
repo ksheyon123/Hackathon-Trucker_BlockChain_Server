@@ -1,0 +1,49 @@
+---
+name: trucker-network
+version: 1.0.0
+client:
+    organization: Org1
+    connection:
+        timeout:
+            peer:
+                endorser: '300'
+            orderer: '300'
+channels:
+    trucker:
+        orderers:
+        - orderer.trucker.com
+        peers:
+            peer0.org1.trucker.com: {}
+organizations:
+    Org1:
+        mspid: Org1MSP
+        peers:
+        - peer0.org1.trucker.com
+        certificateAuthorities:
+        - ca.trucker.com
+    Org2:
+        mspid: Org2MSP
+        peers:
+        - peer0.org2.trucker.com
+        certificateAuthorities:
+        - ca.trucker.com
+    Org3:
+        mspid: Org3MSP
+        peers:
+        - peer0.org3.trucker.com
+        certificateAuthorities:
+        - ca.trucker.com
+orderers:
+    orderer.trucker.com:
+        url: grpc://localhost:7050
+peers:
+    peer0.org1.trucker.com:
+        url: grpc://localhost:7051
+    peer0.org2.trucker.com:
+        url: grpc://localhost:7051
+    peer0.org3.trucker.com:
+        url: grpc://localhost:7051
+certificateAuthorities:
+    ca.trucker.com:
+        url: http://localhost:7054
+        caName: ca.trucker.com

@@ -1,0 +1,5 @@
+npm i -g express-generator
+npm install mysql2
+npm install express-session
+npm install session-file-store
+npm install fabric-network

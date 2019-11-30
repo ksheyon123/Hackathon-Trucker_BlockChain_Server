@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Autoroad - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="stylesheets/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/animate.css">
+    
+    <link rel="stylesheet" href="stylesheets/owl.carousel.min.css">
+    <link rel="stylesheet" href="stylesheets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="stylesheets/magnific-popup.css">
+
+    <link rel="stylesheet" href="stylesheets/aos.css">
+
+    <link rel="stylesheet" href="stylesheets/ionicons.min.css">
+
+    <link rel="stylesheet" href="stylesheets/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="stylesheets/jquery.timepicker.css">
+
+    
+    <link rel="stylesheet" href="stylesheets/flaticon.css">
+    <link rel="stylesheet" href="stylesheets/icomoon.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+  </head>
+  <body>
+    
+	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="/main"><span>TRUCKER</span></a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a href="/main" class="nav-link">메인</a></li>
+				<li class="nav-item active"></li><li class="nav-item"><a href="/pricing" class="nav-link">토큰구매</a></li>
+				<li class="nav-item"><a href="/contact" class="nav-link">화물등록</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+    
+    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+          <div class="col-md-9 ftco-animate pb-5">
+            <h1 class="mb-3 bread">토큰구매</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section ftco-cart">
+			<div class="container-fluid py-3">
+					<div class="row">
+						<div class="col-12 col-sm-8 col-md-6 col-lg-4 mx-auto">
+							<div id="pay-invoice" class="card">
+								<div class="card-body">
+									<div class="card-title">
+										<h3 class="text-center">토큰구매</h3>
+									</div>
+									<hr>
+									<!-- <form action="/echo" method="post" novalidate="novalidate" class="needs-validation"> -->
+										<div class="form-group text-center">
+											<ul class="list-inline">
+												<li class="list-inline-item"><i class="text-muted fa fa-cc-visa fa-2x"></i></li>
+												<li class="list-inline-item"><i class="fa fa-cc-mastercard fa-2x"></i></li>
+												<li class="list-inline-item"><i class="fa fa-cc-amex fa-2x"></i></li>
+												<li class="list-inline-item"><i class="fa fa-cc-discover fa-2x"></i></li>
+											</ul>
+										</div>
+										<div class="form-group">
+											<label for="cc-payment" class="control-label mb-1">결제 갯수</label>
+											<input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" required value="100000" value=''>
+											<span class="invalid-feedback">결제 갯수를 입력하세요.</span>
+										</div>
+										<div class="form-group has-success">
+											<label for="cc-name" class="control-label mb-1">카드 이름</label>
+											<input id="cc-name" name="cc-name" type="text" class="form-control cc-name" required autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
+											<span class="invalid-feedback">카드 이름을 입력하세요.</span>
+										</div>
+										<div class="form-group">
+											<label for="cc-number" class="control-label mb-1">카드 번호</label>
+											<input id="cc-number" name="cc-number" type="tel" class="form-control cc-number identified visa" required="" pattern="[0-9]{16}">
+											<span class="invalid-feedback">카드 번호를 입력하세요.r</span>
+										</div>
+										<div class="row">
+											<div class="col-6">
+												<div class="form-group">
+													<label for="cc-exp" class="control-label mb-1">월/년</label>
+													<input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" required placeholder="MM / YY" autocomplete="cc-exp">
+													<span class="invalid-feedback">월/년을 입력하세요</span>
+												</div>
+											</div>
+											<div class="col-6">
+												<label for="x_card_code" class="control-label mb-1">보안 코드</label>
+												<div class="input-group">
+													<input id="x_card_code" name="x_card_code" type="tel" class="form-control cc-cvc" required autocomplete="off">
+													<span class="invalid-feedback order-last">3개의 보안 코드를 입력하세요</span>
+													<div class="input-group-append">
+														<div class="input-group-text">
+														<span class="fa fa-question-circle fa-lg" data-toggle="popover" data-container="body" data-html="true" data-title="Security Code" 
+														data-content="<div class='text-center one-card'>The 3 digit code on back of the card..<div class='visa-mc-cvc-preview'></div></div>"
+														data-trigger="hover"></span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="x_zip" class="control-label mb-1">코드</label>
+											<input id="x_zip" name="x_zip" type="text" class="form-control" value="" data-val="true" data-val-required="Please enter the ZIP/Postal code" autocomplete="postal-code">
+											<span class="help-block" data-valmsg-for="x_zip" data-valmsg-replace="true"></span>
+										</div>
+										<div>
+											<button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+												<i class="fa fa-lock fa-lg"></i>&nbsp;
+												<span id="payment-button-amount">결제 완료</span>
+												<span id="payment-button-sending" style="display:none;">Sending…</span>
+											</button>
+										</div>
+									<!-- </form> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	</section>
+
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+			<div class="container">
+			  <div class="row mb-5">
+				<div class="col-md">
+				  <div class="ftco-footer-widget mb-4">
+					<h2 class="ftco-heading-2">About Trucker</h2>
+					<p>트러커는 블록체인을 이용한 차주와 화주와의 신뢰성있는 연결을 지원합니다.</p>
+					<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+					  <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+					  <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+					  <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+					</ul>
+				  </div>
+				</div>
+				<div class="col-md">
+				  <div class="ftco-footer-widget mb-4">
+					  <h2 class="ftco-heading-2">연락하고 싶다면?</h2>
+					  <div class="block-23 mb-3">
+						<ul>
+						  <li><span class="icon icon-map-marker"></span><span class="text">경기도 광명시 하안로</span></li>
+						  <li><a href="#"><span class="icon icon-phone"></span><span class="text">02-897-6161</span></a></li>
+						  <li><a href="#"><span class="icon icon-envelope"></span><span class="text">controlexp@naver.com</span></a></li>
+						</ul>
+					  </div>
+				  </div>
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="col-md-12 text-center">
+	  
+				  <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+		Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib (비영리적인 목적으로 사용합니다.)</a>
+		<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+				</div>
+			  </div>
+			</div>
+		  </footer>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="javascripts/jquery.min.js"></script>
+  <script src="javascripts/jquery-migrate-3.0.1.min.js"></script>
+  <script src="javascripts/popper.min.js"></script>
+  <script src="javascripts/bootstrap.min.js"></script>
+  <script src="javascripts/jquery.easing.1.3.js"></script>
+  <script src="javascripts/jquery.waypoints.min.js"></script>
+  <script src="javascripts/jquery.stellar.min.js"></script>
+  <script src="javascripts/owl.carousel.min.js"></script>
+  <script src="javascripts/jquery.magnific-popup.min.js"></script>
+  <script src="javascripts/aos.js"></script>
+  <script src="javascripts/jquery.animateNumber.min.js"></script>
+  <script src="javascripts/bootstrap-datepicker.js"></script>
+  <script src="javascripts/jquery.timepicker.min.js"></script>
+  <script src="javascripts/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="javascripts/google-map.js"></script>
+  <script src="javascripts/main.js"></script>
+    <script>
+    
+    $('#payment-button').click( async() => {
+    var balance = document.getElementById('cc-payment').value;
+
+    try {
+      let response = await fetch('http://localhost:3000/api/token', {
+        method: 'post',
+        headers: {
+          'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify({balance : balance}),
+      });
+      let json = await response.json();
+     if (response.ok) {
+      if(json == false) {
+          window.alert('토큰 구매를 실패하였습니다.');
+        } else {
+          window.alert('토큰 구매가 완료되었습니다.');
+          window.location.reload(true);
+        }
+     }
+    } catch (err) {
+      console.log(err)
+    }
+  });
+    </script>
+  </body>
+</html>

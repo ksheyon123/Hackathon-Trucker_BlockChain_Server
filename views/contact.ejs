@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Autoroad - Free Bootstrap 4 Template by Colorlib</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel='stylesheet' href='/stylesheets/modal.css' />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="stylesheets/open-iconic-bootstrap.min.css">
+  <link rel="stylesheet" href="stylesheets/animate.css">
+
+  <link rel="stylesheet" href="stylesheets/owl.carousel.min.css">
+  <link rel="stylesheet" href="stylesheets/owl.theme.default.min.css">
+  <link rel="stylesheet" href="stylesheets/magnific-popup.css">
+
+  <link rel="stylesheet" href="stylesheets/aos.css">
+
+  <link rel="stylesheet" href="stylesheets/ionicons.min.css">
+
+  <link rel="stylesheet" href="stylesheets/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="stylesheets/jquery.timepicker.css">
+
+
+  <link rel="stylesheet" href="stylesheets/flaticon.css">
+  <link rel="stylesheet" href="stylesheets/icomoon.css">
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <script src="http://code.jquery.com/jquery-1.11.0.js"></script>
+
+  <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&format=javascript&appkey=8cea5446-06f8-4412-bd63-a42e99290fad"></script>
+  
+  <script>
+
+    $(document).ready(() => {
+        getBalance();
+      // Geolocation API에 액세스할 수 있는지를 확인
+      if (navigator.geolocation) {
+        //위치 정보를 얻기
+        navigator.geolocation.getCurrentPosition(function (pos) {
+          var a = pos.coords.latitude;     // 위도
+          var b = pos.coords.longitude; // 경도
+          reverseGeo(a, b);
+          initTmap(a, b);
+          
+        });
+      } else {
+        alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.")
+      }
+      
+    });
+    
+    reverseGeo = async (lon, lat) => {
+      var latitude = document.getElementById('latitude');
+    try {
+      let response = await fetch(
+        `https://apis.openapi.sk.com/tmap/geo/reversegeocoding?version=1&lat=${lon}&lon=${lat}&coordType=WGS84GEO&&appKey=8cea5446-06f8-4412-bd63-a42e99290fad`,
+        {
+          method: 'get',
+        },
+      );
+      let json = await response.json();
+      console.log(json.addressInfo.fullAddress);
+      if (response.ok) {
+        latitude.innerHTML = json.addressInfo.fullAddress;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+    getBalance = async () => {
+        var truckertoken = document.getElementById('truckertoken');
+        try {
+            console.log('ad');
+            let response = await fetch('http://localhost:3000/api/balance', {
+                method: 'get',
+            })
+            let json = await response.json();
+            if (response.ok) {
+                truckertoken.innerHTML = json;
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+  initTmap = async (lon, lat) => {
+      try {
+                var map = new Tmapv2.Map("map_div",  
+            {
+            center: new Tmapv2.LatLng(lon,lat), // 지도 초기 좌표
+            width: "890px", 
+            height: "400px",
+            zoom: 15
+            });
+      } catch (err) {
+          console.log(err)
+      }
+    
+  } 
+  </script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><span>TRUCKER</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
+
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a href="/main" class="nav-link">메인</a></li>
+          <li class="nav-item"><a href="/pricing" class="nav-link">토큰구매</a></li>
+          <li class="nav-item active"><a href="/contact" class="nav-link">화물등록</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END nav -->
+
+  
+  <div id='getBalance'></div>
+  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_1.jpg');"
+    data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+        <div class="col-md-9 ftco-animate pb-5">
+          <h1 class="mb-3 bread">화물 등록</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ftco-section contact-section">
+    <div class="container">
+      <div class="row block-9 justify-content-center mb-5">
+        <div class="col-md-8 mb-md-5">
+            <div class="row block-9 justify-content-center">
+                <h3>화주님의 잔여 토큰은 <div id='truckertoken'></div>TRC 입니다.</h3>
+              </div>
+              <div class="block-23 mb-3">
+            <div class="form-group">
+              <input type="text" class="form-control mb-1" name='startpoint' id='startpoint' placeholder="상차지">
+              <input type="button" onClick="goPopup1();" value="검색" class="btn btn-primary py-3 px-5">
+            </div>  </div>
+            <div class="form-group">
+              <input type="text" class="form-control mb-1" name='endpoint' id='endpoint' placeholder="하차지">
+              <input type="button" onClick="goPopup2();" value="검색" class="btn btn-primary py-3 px-5">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name='carweight' id='carweight'  placeholder="톤수">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name='weight' id='weight' placeholder="적재중량">
+              </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name='transport' id='transport' placeholder="운행방법">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name='cost' id='cost' placeholder="운송비">
+            </div>
+            <div class="form-group">
+                <input type="button" class="form-control"  id='average' value='평균운송비 조회'>
+                평균 운송비: <div id='avecost'></div> 
+            </div>
+            <!-- <div class="form-group"></div>
+                
+            </div> -->
+            <div class="form-group">
+                <input type="text" class="form-control" name='cost' id='cargoup' placeholder="상차일">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name='cost' id='cargodown' placeholder="하차일">
+            </div>
+            <div class="form-group">
+              <textarea name="memo" cols="30" rows="7" class="form-control"  id ='memo' placeholder="메모"></textarea>
+            </div>
+            <div class="form-group">
+              <input type="button" id='regcargo' value="화물 등록" class="btn btn-primary py-3 px-5">
+            </div>
+
+
+        </div>
+      </div>
+
+      <div class="row d-flex mb-5 contact-info justify-content-center">
+          <div class="col-md-4 text-center py-4">
+            <div class="icon">
+              <span class="icon-map-o"></span>
+            </div>
+            <p><span>Address:</span><span id="latitude"><span></p>
+          </div>
+        </div>
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <div onload="initTmap()" id="map_div" class="bg-white"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">About Trucker</h2>
+              <p>트러커는 블록체인을 이용한 차주와 화주와의 신뢰성있는 연결을 지원합니다.</p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">연락하고 싶다면?</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+	                <li><span class="icon icon-map-marker"></span><span class="text">경기도 광명시 하안로</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">02-897-6161</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">controlexp@naver.com</span></a></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib (비영리적인 목적으로 사용합니다.)</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+      <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+      <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+        stroke="#F96D00" /></svg></div>
+
+
+  <script src="javascripts/jquery.min.js"></script>
+  <script src="javascripts/jquery-migrate-3.0.1.min.js"></script>
+  <script src="javascripts/popper.min.js"></script>
+  <script src="javascripts/bootstrap.min.js"></script>
+  <script src="javascripts/jquery.easing.1.3.js"></script>
+  <script src="javascripts/jquery.waypoints.min.js"></script>
+  <script src="javascripts/jquery.stellar.min.js"></script>
+  <script src="javascripts/owl.carousel.min.js"></script>
+  <script src="javascripts/jquery.magnific-popup.min.js"></script>
+  <script src="javascripts/aos.js"></script>
+  <script src="javascripts/jquery.animateNumber.min.js"></script>
+  <script src="javascripts/bootstrap-datepicker.js"></script>
+  <script src="javascripts/jquery.timepicker.min.js"></script>
+  <script src="javascripts/scrollax.min.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="javascripts/google-map.js"></script>
+  <script src="javascripts/main.js"></script>
+
+</body>
+
+<script>
+function goPopup1(){
+	// 주소검색을 수행할 팝업 페이지를 호출합니다.
+	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+	  var pop = window.open("/components/jusoPopup/startpoint","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	
+	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+  }
+  function goPopup2(){
+	// 주소검색을 수행할 팝업 페이지를 호출합니다.
+	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+	  var pop = window.open("/components/jusoPopup/endpoint","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	
+	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+  }
+  function jusoCallBack1(data){
+    var startpoint = document.getElementById('startpoint')
+    startpoint.setAttribute('value',data);
+  }
+  function jusoCallBack2(data){
+    var endpoint = document.getElementById('endpoint')
+    endpoint.setAttribute('value',data);
+
+  }
+  
+  $('#regcargo').click( async () => {
+    var memo = document.getElementById('memo').value;
+    var startpoint = document.getElementById('startpoint').value;
+    var endpoint = document.getElementById('endpoint').value;
+    var carweight = document.getElementById('carweight').value;
+    var weight = document.getElementById('weight').value;
+    var transport = document.getElementById('transport').value;
+    var cost = document.getElementById('cost').value;
+    var up = document.getElementById('cargoup').value;
+    var down = document.getElementById('cargodown').value;
+    try {
+      const response = await fetch('http://localhost:3000/regcargo', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({startpoint: startpoint, endpoint: endpoint, carweight: carweight, weight: weight, transport: transport, cost: cost, cargoup: up, cargodown: down, memo: memo})
+      });
+      let json = await response.json();
+      if(response.ok) {
+        if(json == false) {
+          window.alert('운송비가 부족합니다.')
+        } else {
+          window.alert('화물이 등록되었습니다.')
+        }
+      } else {
+        window.alert('Cargo Registration Failed');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  $('#average').click( async () => {
+    try {
+      var start = document.getElementById('startpoint').value;
+      var end  = document.getElementById('endpoint').value;
+      var avecost = document.getElementById('avecost');
+      var won = document.getElementById('won');
+      var km = document.getElementById('km');
+
+      let response1 = await fetch(
+            `https://apis.openapi.sk.com/tmap/geo/fullAddrGeo?addressFlag=F00&coordType=WGS84GEO&version=1&format=json&fullAddr=${start}&appKey=88bebbd6-8f99-4144-a656-46abd418bba8`,
+            {
+              method: 'get',
+            },
+        );
+          let startdata = await response1.json();
+          let gcs = startdata.coordinateInfo.coordinate[0];
+
+          let response2 = await fetch(
+            `https://apis.openapi.sk.com/tmap/geo/fullAddrGeo?addressFlag=F00&coordType=WGS84GEO&version=1&format=json&fullAddr=${end}&appKey=88bebbd6-8f99-4144-a656-46abd418bba8`,
+            {
+              method: 'get',
+            },
+          );
+          let enddata = await response2.json();
+          let gce = enddata.coordinateInfo.coordinate[0];
+
+          var result = await _startToEndTrace(
+            gcs.newLon,
+            gcs.newLat,
+            gce.newLon,
+            gce.newLat,
+          );
+          let subst = start.split(" ");
+          let response3 = await fetch('http://localhost:3000/getaverage', {
+            method:'post',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({geodata: subst[0]}),
+          });
+          let geoname = await response3.json();
+          ddata = Math.floor(result / 1000);
+          recomendation = (geoname.average * ddata);
+          avecost.innerHTML = recomendation;
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  _startToEndTrace = async (a, b, c, d) => {
+    console.log(a,b,c,d)
+            let headers = {};
+            headers.appKey = '8cea5446-06f8-4412-bd63-a42e99290fad';
+            try {
+              let response = await fetch(
+                `https://apis.openapi.sk.com/tmap/routes?endX=${c}&endY=${d}&startX=${a}&startY=${b}&reqCoordType=WGS84GEO&resCoordType=WGS84GEO&searchOption =0&trafficInfo =N`,
+                {
+                  method: 'post',
+                  headers: headers,
+                },
+              );
+              let json = await response.json();
+              if (response.ok) {
+                return json.features[0].properties.totalDistance;
+              }
+            } catch (err) {
+              console.log('bad', err);
+            }
+          };
+</script>
+<%- include ../public/javascripts/modal.ejs %>
+</html>
