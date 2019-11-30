@@ -325,7 +325,8 @@ function goPopup1(){
         if(json == false) {
           window.alert('운송비가 부족합니다.')
         } else {
-          window.alert('화물이 등록되었습니다.')
+          window.alert('화물이 등록되었습니다.');
+          window.location.reload(true);
         }
       } else {
         window.alert('Cargo Registration Failed');
