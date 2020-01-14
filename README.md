@@ -4,11 +4,9 @@
 
 # 하이브리드 블록체인을 활용한 화물 운송 중계 플랫폼 (2019/11/07 - 2019/11/30)
 
-> Subtitle or Short Description Goes Here
+> 기사님 오늘도 파이팅! 트러커가 응원합니다
 
-> ideally one sentence
-
-- For more on these wonderful ~~badgers~~ badges, refer to <a href="http://badges.github.io/badgerbadgerbadger/" target="_blank">`badgerbadgerbadger`</a>.
+> 트러커는 블록체인을 활용한 화물 운수 중계 플랫폼으로 합리적이고 정당한 시장을 만들어가겠습니다
 
 ***INSERT ANOTHER GRAPHIC HERE***
 
