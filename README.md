@@ -1,10 +1,8 @@
 <img src="https://user-images.githubusercontent.com/52062612/72335305-1c26f980-3702-11ea-8cef-8f6398922b85.png" title="Trucker" alt="Trucker-Title"></a>
 
-<!-- [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com) -->
+***시연영상링크(include hyperlink in image)***
 
-***INSERT GRAPHIC HERE (include hyperlink in image)***
-
-# Repository Title Goes Here
+# 하이브리드 블록체인을 활용한 화물 운송 중계 플랫폼
 
 > Subtitle or Short Description Goes Here
 
