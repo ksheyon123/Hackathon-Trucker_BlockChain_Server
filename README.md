@@ -1,6 +1,6 @@
 # KISA IDEATHON
 과기정통부 장관상 수상 <br>
-Trucker ( 2019/08/25 ~ 2019/09/26 )
+Trucker ( 2019/11/07 ~ 2019/11/30 )
  - Truck Management System Using Blockchain
  - Escrow Payment
  - Hyperledger-Fabric Cargo Data Database
