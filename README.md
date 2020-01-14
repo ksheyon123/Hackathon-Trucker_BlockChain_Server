@@ -1,4 +1,4 @@
-### KISA BLOCKCHAIN IDEATHON ### **개발 기간 : 2019/11/07 - 2019/11/30**
+### KISA BLOCKCHAIN IDEATHON (2019/11/07 - 2019/11/30)
 <br/>
 과학기술정보통신부 장관상 수상
 
