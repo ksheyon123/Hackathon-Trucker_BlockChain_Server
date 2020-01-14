@@ -1,6 +1,6 @@
 <img src="https://user-images.githubusercontent.com/52062612/72335305-1c26f980-3702-11ea-8cef-8f6398922b85.png" title="Trucker" alt="Trucker-Title"></a>
 
-***시연영상링크(include hyperlink in image)***
+<a href="https://www.youtube.com/watch?v=N3SM7HGhG8g">***시연영상링크***</a>
 
 # 하이브리드 블록체인을 활용한 화물 운송 중계 플랫폼 (2019/11/07 - 2019/11/30)
 
