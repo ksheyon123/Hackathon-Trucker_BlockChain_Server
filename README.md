@@ -27,13 +27,32 @@
 > Or Contributors/People
 
 - 박경재 (팀장)
--- 
+  - Web Front-End (Bootstrap)
+  - Back-End (GPS API)
+  - Solidity
+  
+- 강서현
+  - Web Front-End (HTML5, Javascript)
+  - Back-End (NodeJS, API)
+  - Chaincode
+
+- 오현준
+  - App Front-End (React-Native)
+  - Hyperledger Fabric
+  - Chaincode
 
 ---
 
-## Skills
-- 
+## Tools
 
+- Front-End : 
+  - Web (HTML5, Javascript, Bootstrap)
+  - App (React-Native)
+
+- Back-End : 
+  - Server (NodeJS)
+  - Solidity
+  - Hyperledger Fabric
 
 ---
 ## UI
