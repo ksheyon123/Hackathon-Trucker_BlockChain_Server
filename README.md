@@ -20,22 +20,23 @@
 
 <img src="https://user-images.githubusercontent.com/52062612/72349115-3cb17c80-371f-11ea-8f25-03cc610e7c51.png" title="Trucker_Service" alt="Trucker_Service">
 
-
----
-## UI
-<img src="https://user-images.githubusercontent.com/52062612/72338401-bccbe800-3707-11ea-850d-45ec762dc43c.jpg" title="Trucker_Process" alt="Trucker-Process">
-
 ---
 
 ## Team
 
 > Or Contributors/People
 
-
-- You can just grab their GitHub profile image URL
-- You should probably resize their picture using `?s=200` at the end of the image URL.
+- 박경재 (팀장)
+-- 
 
 ---
 
 ## Skills
 - 
+
+
+---
+## UI
+<img src="https://user-images.githubusercontent.com/52062612/72338401-bccbe800-3707-11ea-850d-45ec762dc43c.jpg" title="Trucker_Process" alt="Trucker-Process">
+
+---
