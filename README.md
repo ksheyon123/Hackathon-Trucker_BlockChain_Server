@@ -11,7 +11,7 @@
 <hr/>
 
 ## UI
-[![INSERT YOUR GRAPHIC HERE](http://i.imgur.com/dt8AUb6.png)]()
+<img src="https://user-images.githubusercontent.com/52062612/72338401-bccbe800-3707-11ea-850d-45ec762dc43c.jpg" title="Trucker_Process" alt="Trucker-Process">
 
 - Most people will glance at your `README`, *maybe* star it, and leave
 - Ergo, people should understand instantly what your project is about based on your repo
